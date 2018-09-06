@@ -2,20 +2,163 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 
 client.on('ready', () => {
-    console.log('I am ready!');
+  console.log(`Logged in as ${client.user.tag}!`);
 });
 
-client.on('message', message => {
-    if (message.content === 'ping') {
-    	message.channel.send('PONG!');
-  	}
+
+
+
+client.on('message', msg => {
+  if (msg.content === 'السلام عليكم') {
+    msg.reply('**وعليكم السلام ورحمة الله وبركاته ** :rose:');
+  }
 });
 
-client.on('message', message => {
-    if (message.content === 'bing') {
-    	message.reply('BONG!');
-  	}
+
+
+
+/// &server
+
+client.on('message', function(msg) {
+  if(msg.content.startsWith ('&server')) {
+    if(!msg.channel.guild) return msg.reply('**:x: اسف لكن هذا الامر للسيرفرات فقط **');
+    let embed = new Discord.RichEmbed()
+    .setColor('RANDOM')
+    .setThumbnail(msg.guild.iconURL)
+    .addField(':globe_with_meridians: **اسم السيرفر : **' , `**[ ${msg.guild.name} ]**`,true)
+    .addField(':earth_africa: ** موقع السيرفر :**',`**[ ${msg.guild.region} ]**`,true)
+    .addField(':military_medal:** الرتب :**',`**[ ${msg.guild.roles.size} ]**`,true)
+    .addField(':bust_in_silhouette:** عدد الاعضاء :**',`**[ ${msg.guild.memberCount} ]**`,true)
+    .addField(':white_check_mark:** عدد الاعضاء الاونلاين :**',`**[ ${msg.guild.members.filter(m=>m.presence.status == 'online').size} ]**`,true)
+    .addField(':pencil:** الرومات الكتابية :**',`**[ ${msg.guild.channels.filter(m => m.type === 'text').size} ]**`,true)
+    .addField(':loud_sound:** رومات الصوت :**',`**[ ${msg.guild.channels.filter(m => m.type === 'voice').size} ]**`,true)
+    .addField(':crown:** صاحب السيرفر :**',`**[ ${msg.guild.owner} ]**`,true)
+    .addField(':id:** ايدي السيرفر :**',`**[ ${msg.guild.id} ]**`,true)
+    .addField(':date:** تم عمل السيرفر في : **',msg.guild.createdAt.toLocaleString())
+    .addField('** Night Bot Creator :robot:**', '**! Vaniet**')
+    msg.channel.send({embed:embed});
+  }
 });
+
+
+
+
+/// n!mutechannel / n!unmutechannel
+
+client.on('message', message => {
+
+    if (message.content === "&mutechannel") {
+                        if(!message.channel.guild) return message.reply(' This command only for servers');
+
+if(!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply('**ليس لديك أي صلاحيات لاستعمال هذا الامر** :no_entry:');
+           message.channel.overwritePermissions(message.guild.id, {
+         SEND_MESSAGES: false
+
+           }).then(() => {
+               message.reply("**تم تقفيل الشات** ✅ ")
+           });
+             }
+
+if (message.content === "&unmutechannel") {
+    if(!message.channel.guild) return message.reply(' This command only for servers');
+
+if(!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply('**ليس لديك أي صلاحيات لاستعمال هذا الامر** :no_entry:');
+           message.channel.overwritePermissions(message.guild.id, {
+         SEND_MESSAGES: true
+
+           }).then(() => {
+               message.reply("** تم فتـح الشات ** ✅")
+           });
+             }
+
+
+
+});
+
+
+
+
+///n!autoc
+
+var stopReacord = true;
+var reactionRoles = [];
+var definedReactionRole = null;
+if(!prefix) var prefix = "&" ; // البرفكس
+
+client.on("message", async message => {
+    const args = message.content.slice(prefix.length).trim().split(/ +/g);
+    const command = args.shift().toLowerCase();
+    if(message.author.bot) return;
+    if(message.content.indexOf(prefix) !== 0) return;
+    if (command == "autoc") {
+      if(!message.channel.guild) return message.reply(`**this ~~command~~ __for servers only__**`);
+      if(!message.member.hasPermission("ADMINISTRATOR")) return message.channel.send("sorry you can't do this");
+      if(!args[0] || args[1]) return message.channel.send(`\`\`\`${prefix}autoC <role-name>\`\`\``);
+      var role = message.guild.roles.find( role => { return role.name == args[0] });
+      if(!role) return message.channel.send(`**لم يتم وجود رتبة بهذا الاسم ${definedRoleName} **`);
+      if(definedReactionRole != null  || !stopReacord) return message.channel.send("**هناك من يقوم باستعمال الميزة حالياً يرجى الانتظار**");
+      message.channel.send(`** تم بنجاح، الآن يرجى التصويت للحصول على رتبة :white_check_mark: ** ${role.name}`);
+      definedReactionRole = role;
+      stopReacord = false;
+    }
+})
+client.on('raw', raw => {
+  if (!['MESSAGE_REACTION_ADD', 'MESSAGE_REACTION_REMOVE'].includes(raw.t)) return;
+  var channel = client.channels.get(raw.d.channel_id);
+  if (channel.messages.has(raw.d.message_id)) return;
+  channel.fetchMessage(raw.d.message_id).then(message => {
+    var reaction = message.reactions.get( (raw.d.emoji.id ? `${raw.d.emoji.name}:${raw.d.emoji.id}` : raw.d.emoji.name) );
+    if (raw.t === 'MESSAGE_REACTION_ADD') return client.emit('messageReactionAdd', reaction, client.users.get(raw.d.user_id));
+    if (raw.t === 'MESSAGE_REACTION_REMOVE') return client.emit('messageReactionRemove', reaction, client.users.get(raw.d.user_id));
+  });
+});
+client.on('messageReactionAdd', (reaction, user) => {
+    if(user.id == client.user.id) return;
+    if(!stopReacord) {
+      var done = false;
+      reactionRoles[reaction.message.id] = { role: definedReactionRole, message_id: reaction.message.id, emoji: reaction.emoji};
+      stopReacord =  true;
+      definedReactionRole = null;
+      reaction.message.react(reaction.emoji.name)
+      .catch(err => {done = true; reaction.message.channel.send(`**عذراً لا استطيع استعمال هذا الايموجي، يرجى التأكد من ان الايموجي من نظام الدسكورد الثابت**`)})
+      if(done) reaction.remove(user);
+    } else {
+      var request = reactionRoles[reaction.message.id];
+      if(!request) return;
+      if(request.emoji.name != reaction.emoji.name) return reaction.remove(user);
+      reaction.message.guild.members.get(user.id).addRole(request.role);
+    }
+})
+client.on('messageReactionRemove', (reaction, user) => {
+  if(user.id == client.user.id) return;
+  if(!stopReacord) return;
+  let request = reactionRoles[reaction.message.id];
+  if(!request) return;
+  reaction.message.guild.members.get(user.id).removeRole(request.role);
+});
+
+
+
+
+
+/// &ping
+client.on('message', message => {
+if(!message.channel.guild) return;
+if (message.content.startsWith('&ping')) {
+if(!message.channel.guild) return;
+var msg = `${Date.now() - message.createdTimestamp}`
+var api = `${Math.round(client.ping)}`
+if (message.author.bot) return;
+let embed = new Discord.RichEmbed()
+.setAuthor(message.author.username,message.author.avatarURL)
+.setColor('RANDOM')
+.addField('**Time Taken:**',msg + " ms 📶 ")
+.addField('**WebSocket:**',api + " ms 📶 ")
+message.channel.send({embed:embed});
+}
+});
+
+
 
 // THIS  MUST  BE  THIS  WAY
 client.login(process.env.BOT_TOKEN);
