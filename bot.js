@@ -182,7 +182,7 @@ client.on("message", msg => {
 client.on('message', message => {
               if (!message.channel.guild) return;
       if(message.content =='!mem')
-      var kayan = new Discord.RichEmbed()
+      var night = new Discord.RichEmbed()
       .setColor('RANDOM')
       .setThumbnail(message.author.avatarURL)
       .setFooter(message.author.username, message.author.avatarURL)
@@ -194,7 +194,7 @@ client.on('message', message => {
       .addField('📙| Idle',`${message.guild.members.filter(m=>m.presence.status == 'idle').size}`)
       .addField('📓| Offline',`${message.guild.members.filter(m=>m.presence.status == 'offline').size}`)
       .addField('➡| Server Members',`${message.guild.memberCount}`)
-      message.channel.send(kayan);
+      message.channel.send(night);
 
     });
 
