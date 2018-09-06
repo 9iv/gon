@@ -20,7 +20,7 @@ client.on('message', msg => {
 /// &server
 
 client.on('message', function(msg) {
-  if(msg.content.startsWith ('&server')) {
+  if(msg.content.startsWith ('!server')) {
     if(!msg.channel.guild) return msg.reply('**:x: اسف لكن هذا الامر للسيرفرات فقط **');
     let embed = new Discord.RichEmbed()
     .setColor('RANDOM')
@@ -43,11 +43,11 @@ client.on('message', function(msg) {
 
 
 
-/// n!mutechannel / n!unmutechannel
+/// n!mutechannel / !unmutechannel
 
 client.on('message', message => {
 
-    if (message.content === "&mutechannel") {
+    if (message.content === "!mutechannel") {
                         if(!message.channel.guild) return message.reply(' This command only for servers');
 
 if(!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply('**ليس لديك أي صلاحيات لاستعمال هذا الامر** :no_entry:');
@@ -59,7 +59,7 @@ if(!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply('**ل�
            });
              }
 
-if (message.content === "&unmutechannel") {
+if (message.content === "!unmutechannel") {
     if(!message.channel.guild) return message.reply(' This command only for servers');
 
 if(!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply('**ليس لديك أي صلاحيات لاستعمال هذا الامر** :no_entry:');
@@ -83,7 +83,7 @@ if(!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply('**ل�
 var stopReacord = true;
 var reactionRoles = [];
 var definedReactionRole = null;
-if(!prefix) var prefix = "&" ; // البرفكس
+if(!prefix) var prefix = "!" ; // البرفكس
 
 client.on("message", async message => {
     const args = message.content.slice(prefix.length).trim().split(/ +/g);
@@ -141,10 +141,10 @@ client.on('messageReactionRemove', (reaction, user) => {
 
 
 
-/// &ping
+/// !ping
 client.on('message', message => {
 if(!message.channel.guild) return;
-if (message.content.startsWith('&ping')) {
+if (message.content.startsWith('!ping')) {
 if(!message.channel.guild) return;
 var msg = `${Date.now() - message.createdTimestamp}`
 var api = `${Math.round(client.ping)}`
@@ -157,6 +157,49 @@ let embed = new Discord.RichEmbed()
 message.channel.send({embed:embed});
 }
 });
+
+
+
+
+client.on("message", msg => {
+  if(msg.content === '!' + "id") {
+      const embed = new Discord.RichEmbed();
+  embed.addField("🔱| اسم الحساب :", `${msg.author.username}#${msg.author.discriminator}`, true)
+          .addField("🆔| الاي دي :", `${msg.author.id}`, true)
+          .setColor("RANDOM")
+          .setFooter(msg.author.username , msg.author.avatarURL)
+          .setThumbnail(`${msg.author.avatarURL}`)
+          .setTimestamp()
+          .setURL(`${msg.author.avatarURL}`)
+          .addField('📛| الحالة :', `${msg.author.presence.status.toUpperCase()}`, true)
+          .addField('🎲| بلاينج :', `${msg.author.presence.game === null ? "No Game" : msg.author.presence.game.name}`, true)
+          .addField('🏅| الرتب : ', `${msg.member.roles.filter(r => r.name).size}`, true)
+          .addField('📅| تم الانضمام للديسكورد في :', `${msg.createdAt}`,true)
+          .addField('🤖| هل هو بوت ؟', `${msg.author.bot.toString().toUpperCase()}`, true);
+      msg.channel.send({embed: embed})
+  }
+});
+
+client.on('message', message => {
+              if (!message.channel.guild) return;
+      if(message.content =='!members')
+      var kayan = new Discord.RichEmbed()
+      .setColor('RANDOM')
+      .setThumbnail(message.author.avatarURL)
+      .setFooter(message.author.username, message.author.avatarURL)
+      .setTitle('🌷| **حالة الأعضاء**')
+      .addBlankField(true)
+      .addField('📗| Online',
+      `${message.guild.members.filter(m=>m.presence.status == 'online').size}`)
+      .addField('📕| DND',`${message.guild.members.filter(m=>m.presence.status == 'dnd').size}`)
+      .addField('📙| Idle',`${message.guild.members.filter(m=>m.presence.status == 'idle').size}`)
+      .addField('📓| Offline',`${message.guild.members.filter(m=>m.presence.status == 'offline').size}`)
+      .addField('➡| Server Members',`${message.guild.memberCount}`)
+      message.channel.send(kayan);
+
+    });
+
+
 
 
 
