@@ -152,8 +152,7 @@ if (message.author.bot) return;
 let embed = new Discord.RichEmbed()
 .setAuthor(message.author.username,message.author.avatarURL)
 .setColor('RANDOM')
-.addField('**Time Taken:**',msg + " ms 📶 ")
-.addField('**WebSocket:**',api + " ms 📶 ")
+.addField('**My Ping :D:**',msg + " ms 📶 ")
 message.channel.send({embed:embed});
 }
 });
@@ -182,7 +181,7 @@ client.on("message", msg => {
 
 client.on('message', message => {
               if (!message.channel.guild) return;
-      if(message.content =='!members')
+      if(message.content =='!mem')
       var kayan = new Discord.RichEmbed()
       .setColor('RANDOM')
       .setThumbnail(message.author.avatarURL)
@@ -198,9 +197,6 @@ client.on('message', message => {
       message.channel.send(kayan);
 
     });
-
-
-
 
 
 // THIS  MUST  BE  THIS  WAY
