@@ -682,7 +682,6 @@ client.on("message", message => {
     }
 });
 
-client.on('message', message => {
 
 
 // THIS  MUST  BE  THIS  WAY
