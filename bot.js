@@ -327,7 +327,7 @@ if (client.content ===  prefix + 'create-colors'){
     let channelBOT = ""
     let messageBOT = ""
     message.channel.send(("", {embed: {
-      title: "` ➡ `** Messege System **",
+      title: "` ➡ `** Vaniet. : **",
       color: 0x06DF00,
       timestamp: new Date(),
       description:"قم بكتابة ايدي الغرفة",
@@ -342,7 +342,7 @@ if (client.content ===  prefix + 'create-colors'){
           pop1.first().delete(/*  */)
           messageArray1.delete(/*  */)
           message.channel.send(("", {embed: {
-            title: "` ➡ `** Messege System **",
+            title: "` ➡ `** Vaniet. : **",
             color: 0x06DF00,
             timestamp: new Date(),
             description:"قم بكتابة الرسالة",
@@ -354,7 +354,18 @@ if (client.content ===  prefix + 'create-colors'){
             message.channel.awaitMessages(filter ,{max:1,time:30000,error:['time'],} ).then(pop2=>{
               messageBOT = pop2.first(/*  */)
               pop2.first().delete(/*  */)
-              messageArray2.delete(/*  */)
+              messageArray2.delete(/*  */) {
+                message.channel.send(("", {embed: {
+                  title: "` ➡ `** Vaniet. : **",
+                  color: 0x06DF00,
+                  timestamp: new Date(),
+                  description:"** تم ارسال الرسالة بنجاح! **",
+                  footer: {
+                    icon_url: client.user.avatarURL,
+                    text: "©    BOT"
+                  }}
+              }
+
             message.guild.channels.find("id",channelBOT).sendMessage(messageBOT.toString())
                 })
             })
