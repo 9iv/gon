@@ -380,7 +380,10 @@ if (!args[1]) {
   shorten.custom(args[0], args[1], function(res) {
     if (res.startsWith('Error:')) return message.channel.send(`اختصار الرابط:**${res}**`);
     message.channel.send(`اختصار الرابط:**<${res}>**`);
-})}}});
+})
+}
+}
+});
 
 
 // THIS  MUST  BE  THIS  WAY
