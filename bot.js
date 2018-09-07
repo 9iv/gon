@@ -287,5 +287,21 @@ if (message.content.startsWith(prefix + 'setplay')) {
 });
 
 
+client.on('message', vaniet => {
+
+if (ra3d.content ===  prefix + 'create-colors'){
+      if (!ra3d.member.hasPermission('MANAGE_ROLES')) return ra3d.channel.sendMessage('`**⚠ | `[MANAGE_ROLES]` لا يوجد لديك صلاحية**');
+      ra3d.channel.send("**✅ | يتم عمل الالوان**");
+          setInterval(function(){})
+            let count = 0;
+            let ecount = 0;
+  for(let x = 1; x < 141; x++){
+    ra3d.guild.createRole({name:x,
+      color: 'RANDOM'})
+      }
+    }
+});
+
+
 // THIS  MUST  BE  THIS  WAY
 client.login(process.env.BOT_TOKEN);
