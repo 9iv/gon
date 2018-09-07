@@ -354,18 +354,7 @@ if (client.content ===  prefix + 'create-colors'){
             message.channel.awaitMessages(filter ,{max:1,time:30000,error:['time'],} ).then(pop2=>{
               messageBOT = pop2.first(/*  */)
               pop2.first().delete(/*  */)
-              messageArray2.delete(/*  */) {
-                message.channel.send(("", {embed: {
-                  title: "` ➡ `** Vaniet. : **",
-                  color: 0x06DF00,
-                  timestamp: new Date(),
-                  description:"** تم ارسال الرسالة بنجاح! **",
-                  footer: {
-                    icon_url: client.user.avatarURL,
-                    text: "©    BOT"
-                  }}
-              }
-
+              messageArray2.delete(/*  */)
             message.guild.channels.find("id",channelBOT).sendMessage(messageBOT.toString())
                 })
             })
