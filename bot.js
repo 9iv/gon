@@ -448,5 +448,33 @@ client.on("message", msg => {
 });
 
 
+    client.on('message' , message => {
+    if (message.content === '!help') {
+             let embed = new Discord.RichEmbed()
+
+          .setThumbnail(message.author.avatarURL)
+          .addField("**🌐 الأوامر العامه**","** **")
+          .addField("**!avatar**","**عرض صورتك الشخصية**")
+          .addField("**!server**","**عرض جميع معلومات السيرفر**")
+           .addField("**!id**","**عرض معلومات عنك**")
+       .addField("**!help**","**ارسال هذه الأوامر للعضو في الخاص**")
+       .addField("**!ping**","** عرض سرعة اتصال البوت**")
+    .setColor('RANDOM')
+      message.author.sendEmbed(embed);
+        }
+    });
+
+
+    client.on('message', message => {
+                if (message.content.startsWith("!help")) {
+         let embed = new Discord.RichEmbed()
+    .setThumbnail(message.author.avatarURL)
+    .addField('     Help ' ,' تم ارسال الاوامر الي الخاص ✉  ')
+    .setColor('#B101FC')
+      message.channel.sendEmbed(embed);
+        }
+    });
+
+
 // THIS  MUST  BE  THIS  WAY
 client.login(process.env.BOT_TOKEN);
