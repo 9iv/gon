@@ -342,13 +342,13 @@ if (client.content ===  prefix + 'create-colors'){
           pop1.first().delete(/*  */)
           messageArray1.delete(/*  */)
           message.channel.send(("", {embed: {
-            title: "` ➡ `** Messege System **",
+            title: "` ➡ `** Vaniet System. : **",
             color: 0x06DF00,
             timestamp: new Date(),
             description:"قم بكتابة الرسالة",
             footer: {
               icon_url: client.user.avatarURL,
-              text: "©    BOT"
+              text: "© Vaniey BOT"
             }}
           })).then((messageArray2)=>{
             message.channel.awaitMessages(filter ,{max:1,time:30000,error:['time'],} ).then(pop2=>{
