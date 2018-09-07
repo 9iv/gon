@@ -250,14 +250,14 @@ client.on('message', message => {
   if (message.content.startsWith(prefix + 'setwatch')) {
   client.user.setActivity(argresult, {type: 'WATCHING'})
      console.log('test' + argresult);
-    message.channel.sendMessage(`Watch Now: **${argresult}`)
+    message.channel.sendMessage(`Watch Now: **${argresult}**`)
 }
 
 
   if (message.content.startsWith(prefix + 'setlis')) {
   client.user.setActivity(argresult, {type: 'LISTENING'})
      console.log('test' + argresult);
-    message.channel.sendMessage(`LISTENING Now: **${argresult}`)
+    message.channel.sendMessage(`LISTENING Now: **${argresult}**`)
 }
 
 
@@ -274,12 +274,12 @@ if (message.content.startsWith(prefix + 'setavatar')) {
 if (message.content.startsWith(prefix + 'setstream')) {
   client.user.setGame(argresult, "https://www.twitch.tv/9ivv");
      console.log('test' + argresult);
-    message.channel.sendMessage(`Streaming: **${argresult}`)
+    message.channel.sendMessage(`Streaming: **${argresult}**`)
 }
 if (message.content.startsWith(prefix + 'setplay')) {
   client.user.setGame(argresult);
      console.log('test' + argresult);
-    message.channel.sendMessage(`Playing: **${argresult}`)
+    message.channel.sendMessage(`Playing: **${argresult}**`)
 }
 
 
@@ -342,13 +342,13 @@ if (client.content ===  prefix + 'create-colors'){
           pop1.first().delete(/*  */)
           messageArray1.delete(/*  */)
           message.channel.send(("", {embed: {
-            title: "` ➡ `** Vaniet System. : **",
+            title: "` ➡ `** Messege System **",
             color: 0x06DF00,
             timestamp: new Date(),
             description:"قم بكتابة الرسالة",
             footer: {
               icon_url: client.user.avatarURL,
-              text: "© Vaniey BOT"
+              text: "©    BOT"
             }}
           })).then((messageArray2)=>{
             message.channel.awaitMessages(filter ,{max:1,time:30000,error:['time'],} ).then(pop2=>{
