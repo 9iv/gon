@@ -160,28 +160,6 @@ message.channel.send({embed:embed});
 }
 });
 
-
-
-
-client.on("message", msg => {
-  if(msg.content === '!' + "id") {
-      const embed = new Discord.RichEmbed();
-  embed.addField("🔱| اسم الحساب :", `${msg.author.username}#${msg.author.discriminator}`, true)
-          .addField("🆔| الاي دي :", `${msg.author.id}`, true)
-          .setColor("RANDOM")
-          .setFooter(msg.author.username , msg.author.avatarURL)
-          .setThumbnail(`${msg.author.avatarURL}`)
-          .setTimestamp()
-          .setURL(`${msg.author.avatarURL}`)
-          .addField('📛| الحالة :', `${msg.author.presence.status.toUpperCase()}`, true)
-          .addField('🎲| بلاينج :', `${msg.author.presence.game === null ? "No Game" : msg.author.presence.game.name}`, true)
-          .addField('🏅| الرتب : ', `${msg.member.roles.filter(r => r.name).size}`, true)
-          .addField('📅| تم الانضمام للديسكورد في :', `${msg.createdAt}`,true)
-          .addField('🤖| هل هو بوت ؟', `${msg.author.bot.toString().toUpperCase()}`, true);
-      msg.channel.send({embed: embed})
-  }
-});
-
 client.on('message', message => {
               if (!message.channel.guild) return;
       if(message.content =='!mem')
@@ -362,6 +340,112 @@ if (client.content ===  prefix + 'create-colors'){
      })
     }
 })
+
+client.on('message', message => {
+
+  if (message.content === '!avatar') {
+    message.reply(message.author.avatarURL);
+  }
+});
+
+client.on('message', message => {
+if (message.content.startsWith('!inv')) {
+let oi = message.mentions.users.first() ? message.mentions.users.first().id : message.author.id ;
+  let img = message.mentions.users.first() ? message.mentions.users.first().username : message.author.username;
+  let imagemm = message.mentions.users.first() ? message.mentions.users.first().avatarURL : message.author.avatarURL
+  message.guild.fetchInvites().then(invs => {
+    let member = client.guilds.get(message.guild.id).members.get(oi);
+    let personalInvites = invs.filter(i => i.inviter.id === oi);
+    let urll = invs.filter(i => i.inviter.id === oi);
+    let link = urll.reduce((p , v) => v.url +` , Total de membros recrutados no convite: ${v.uses}.\n`+ p, `\nServidor: ${message.guild.name} \n `);
+    let inviteCount = personalInvites.reduce((p, v) => v.uses + p, 0);
+   let exec = personalInvites.reduce((p, v) => v.inviter);
+ let possibleInvites = [['Total de membros recrutados:']];
+possibleInvites.push([inviteCount, exec]);
+        let user = message.mentions.users.first() || message.author;
+        let mem = message.guild.member(user);
+        let millisJoined = new Date().getTime() - mem.joinedAt.getTime();
+        let daysJoined = millisJoined / 1000 / 60 / 60 / 24;
+const alpha = new Discord.RichEmbed()
+.setAuthor(img)
+.addField('🏆 Invite Infos',  `\n\n► لقد قمت بدعوة ما مجموعه \`\`${Number(inviteCount)}\`\` عضو.\n\n► لقد انضممت لسرفر مند\`${daysJoined.toFixed(0)}\`يوم .\n\n► لقد انضممت بهذه الدعوة\`${exec}\``,true)
+.setThumbnail(imagemm)
+.setColor(0x4959e9);
+message.channel.send(alpha);
+
+});
+
+};
+  });
+
+
+  client.on("message", message => {
+          var prefix = ("!")
+          let args = message.content.split(" ").slice(1);
+        if (message.content.startsWith(prefix + 'report')) {
+              let user = message.mentions.users.first();
+              let reason = args.slice(1).join(' ');
+              let modlog = client.channels.find('name', 'report');
+              if (message.mentions.users.size < 0) return message.reply('**يجب عليك منشن للعضو المراد الابلاغ عليه**').catch(console.error);
+              if (!reason) return message.reply('**لم يتم اختيار عضو لعمل بلاغ عليه أو انه لم يتم تحديد سبب للبلاغً**');
+
+          if (!modlog) return message.reply('**لا يوجد روم بأسم report**');
+          const embed = new Discord.RichEmbed()
+            .setColor(0x00AE86)
+            .setTimestamp()
+            .addField('**نوع الرسالة**:', 'Report')
+            .addField('**المراد الابلاغ عليه**:', `${user.username}#${user.discriminator} (${user.id}`)
+            .addField('**صاحب الابلاغ**:', `${message.author.username}#${message.author.discriminator}`)
+            .addField('**السبب**', reason);
+            message.delete()
+            return client.channels.get(modlog.id).sendEmbed(embed).catch(console.error);
+            console.log('[report] Send By: ' + message.author.username)
+        }
+        });
+
+        client.on('message', message => {
+            let messageArray = message.content.split(" ");
+            let cmd = messageArray[0];
+            let args = messageArray.slice(0);
+            let prefix = '!';
+
+            if(cmd === `${prefix}setIcon`) {
+                if(!args[1].match(/^(jpeg|jpg|png)/)) {
+                    message.guild.setIcon(args[1]).then(message.channel.send(`** :white_check_mark: تم تغيير صورة السيرفر بنجاح**`))
+                    let embed = new Discord.RichEmbed()
+                    .setImage(args[1])
+                    .setColor('RANDOM')
+                    message.channel.send(embed)
+                }
+            }
+        });
+
+client.on('message', message => {
+    if (message.content === '!rip') {
+        const attachment = new Attachment('https://i.imgur.com/w3duR07.png');
+        message.channel.send(attachment);
+    }
+});
+
+
+client.on("message", msg => {
+  if(msg.content === '!' + "id") {
+      const embed = new Discord.RichEmbed();
+  embed.addField("🔱| اسم الحساب :", `${msg.author.username}#${msg.author.discriminator}`, true)
+          .addField("🆔| الاي دي :", `${msg.author.id}`, true)
+          .setColor("RANDOM")
+          .setFooter(msg.author.username , msg.author.avatarURL)
+          .setThumbnail(`${msg.author.avatarURL}`)
+          .setTimestamp()
+          .setURL(`${msg.author.avatarURL}`)
+          .addField('📛| الحالة :', `${msg.author.presence.status.toUpperCase()}`, true)
+          .addField('🎲| بلاينج :', `${msg.author.presence.game === null ? "No Game" : msg.author.presence.game.name}`, true)
+          .addField('🏅| الرتب : ', `${msg.member.roles.filter(r => r.name).size}`, true)
+          .addField('📅| تم الانضمام للديسكورد في :', `${msg.createdAt}`,true)
+          .addField('🤖| هل هو بوت ؟', `${msg.author.bot.toString().toUpperCase()}`, true);
+      msg.channel.send({embed: embed})
+  }
+});
 
 
 // THIS  MUST  BE  THIS  WAY
