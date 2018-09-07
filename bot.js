@@ -516,5 +516,19 @@ Dat = currentTime.getDate()
 });
 
 
+  var botid = ["486922130307547137"];
+   client.on('message', message => {
+       if(message.content.startsWith(`${prefix}invite`)){
+           if(!message.channel.guild) return message.channel.send("This Command is Just For Servers!")
+           var embed = new Discord.RichEmbed()
+           .setTitle("Invite Me !.")
+           .setURL(`https://discordapp.com/oauth2/authorize/?permissions=8&scope=bot&client_id=${botid}`)
+           .setTimestamp()
+           .setColor("RANDOM")
+           message.channel.send({embed})
+       }
+   });
+  
+
 // THIS  MUST  BE  THIS  WAY
 client.login(process.env.BOT_TOKEN);
