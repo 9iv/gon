@@ -288,6 +288,7 @@ if (message.content.startsWith(prefix + 'setplay')) {
 
 
 client.on('message', message => {
+  var prefix = "!";
   if(message.content.startsWith(prefix + "invites")) {
    message.guild.fetchInvites().then(invs => {
      let user = message.mentions.users.first() || message.author
@@ -304,15 +305,15 @@ client.on('message', message => {
 });
 
 client.on('message', vaniet => {
-
-if (ra3d.content ===  prefix + 'create-colors'){
-      if (!ra3d.member.hasPermission('MANAGE_ROLES')) return ra3d.channel.sendMessage('`**⚠ | `[MANAGE_ROLES]` لا يوجد لديك صلاحية**');
-      ra3d.channel.send("**✅ | يتم عمل الالوان**");
+  var prefix = "!";
+if (client.content ===  prefix + 'create-colors'){
+      if (!client.member.hasPermission('MANAGE_ROLES')) return client.channel.sendMessage('`**⚠ | `[MANAGE_ROLES]` لا يوجد لديك صلاحية**');
+      client.channel.send("**✅ | يتم عمل الالوان**");
           setInterval(function(){})
             let count = 0;
             let ecount = 0;
   for(let x = 1; x < 141; x++){
-    ra3d.guild.createRole({name:x,
+    client.guild.createRole({name:x,
       color: 'RANDOM'})
       }
     }
