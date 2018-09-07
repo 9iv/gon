@@ -17,6 +17,11 @@ client.on('message', msg => {
   }
 });
 
+client.on('message', msg => {
+  if (msg.content === 'مين النرم؟') {
+    msg.channel.send('**أحلــى نرم دا ولا ايه -> e2k :eggplant:**')
+  }
+});
 
 /// &server
 
