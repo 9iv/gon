@@ -1,13 +1,19 @@
 {
-  "name": "DefinitelyNotBot",
-  "description": "A Discord bot coded in Discord.JS, hosted using Heroku.",
+  "name": "test-2",
   "version": "1.0.0",
+  "description": "",
   "main": "bot.js",
-  "scripts": {
-    "start": "node bot.js"
-  },
   "dependencies": {
-    "discord.js": "11.1.0",
-    "request": "2.81.0"
-  }
+    "ascii-data-table": "^2.1.1",
+    "discord.js": "^11.4.2",
+    "google-translate-api": "^2.3.0",
+    "moment": "^2.22.2",
+    "snekfetch": "^4.0.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
 }
