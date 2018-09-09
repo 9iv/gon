@@ -605,4 +605,4 @@ Vaniet.on('message', message => {
 
 // Vaniet ☂
 // Made By Vaniet - Vaniet Bot.
-Vaniet.login('NDg2OTIyMTMwMzA3NTQ3MTM3.DnGKow.WaErshfkulm11koNKivKAs7PxEU')
+Vaniet.login('env.process.BOT_TOKEN')
