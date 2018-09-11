@@ -16,9 +16,9 @@ const prefix = ('+');
 
 Light.on('ready', () => {
    console.log(`----------------`);
-      console.log(`LightSystem. Bot By Light.`);
+      console.log(`LightSystem. Bot By Vaniet.`);
         console.log(`----------------`);
-      console.log(`ON ${Light.guilds.size} Servers ' By: Light ' `);
+      console.log(`ON ${Light.guilds.size} Servers ' By: Vaniet ' `);
     console.log(`----------------`);
   console.log(`Logged in as ${Light.user.tag}!`);
 Light.user.setGame(`LightSystem. | +help `,"http://twitch.tv/9ivv")
