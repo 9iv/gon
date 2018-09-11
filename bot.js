@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const Vaniet = new Discord.Client();
+const Light = new Discord.Client();
 const snekfetch = require("snekfetch");
 const prefix = ('+');
 
@@ -14,20 +14,20 @@ const prefix = ('+');
 
 // Logging in Cautation!!
 
-Vaniet.on('ready', () => {
+Light.on('ready', () => {
    console.log(`----------------`);
-      console.log(`VanietSystem. Bot By Vaniet.`);
+      console.log(`LightSystem. Bot By Light.`);
         console.log(`----------------`);
-      console.log(`ON ${Vaniet.guilds.size} Servers ' By: Vaniet ' `);
+      console.log(`ON ${Light.guilds.size} Servers ' By: Light ' `);
     console.log(`----------------`);
-  console.log(`Logged in as ${Vaniet.user.tag}!`);
-Vaniet.user.setGame(`VanietSystem. | +help `,"http://twitch.tv/9ivv")
-Vaniet.user.setStatus("dnd")
+  console.log(`Logged in as ${Light.user.tag}!`);
+Light.user.setGame(`LightSystem. | +help `,"http://twitch.tv/9ivv")
+Light.user.setStatus("dnd")
 });
 
 
 // FIRST AUTO REPLY : هلا
-Vaniet.on('message', msg => {
+Light.on('message', msg => {
     if(msg.content === 'هلا')
         msg.reply('**هــلا والله منورنــا يـا عسـل :rose: **')
 });
@@ -36,7 +36,7 @@ Vaniet.on('message', msg => {
 
 
 // SECOND AUTO REPLY : السلام عليكم
-Vaniet.on('message', msg => {
+Light.on('message', msg => {
     if(msg.content === 'السلام عليكم')
         msg.reply('**وعليــكم السلامـ ورحمـة الله وبركاتــه :rose: **')
 });
@@ -44,7 +44,7 @@ Vaniet.on('message', msg => {
 
 
 // THIRD AUTO REPLY : برب
-Vaniet.on('message', msg => {
+Light.on('message', msg => {
     if(msg.content === 'برب')
         msg.channel.send('**الله معـك لا تـطول :rose: **')
 });
@@ -54,12 +54,12 @@ Vaniet.on('message', msg => {
 
 // PING COMMAND! (+ping)
 
-Vaniet.on('message', message => {
+Light.on('message', message => {
     if(!message.channel.guild) return;
 if (message.content.startsWith(prefix + 'ping')) {
 if(!message.channel.guild) return;
 var msg = `${Date.now() - message.createdTimestamp}`
-var api = `${Math.round(Vaniet.ping)}`
+var api = `${Math.round(Light.ping)}`
 if (message.author.bot) return;
 let embed = new Discord.RichEmbed()
 .setAuthor(message.author.username,message.author.avatarURL)
@@ -72,7 +72,7 @@ message.channel.send({embed:embed});
 
 // AVATAR COMMAND! (+avatar)
 
-Vaniet.on('message', message => {
+Light.on('message', message => {
   if (message.content.startsWith("+avatar")) {
       var mentionned = message.mentions.users.first();
   var System;
@@ -96,7 +96,7 @@ Vaniet.on('message', message => {
 
 // ID COMMAND! (+ID)
 
-Vaniet.on('message', message => {
+Light.on('message', message => {
 var args = message.content.split(" ").slice(1);
 if(message.content.startsWith(prefix + 'id')) {
 var year = message.author.createdAt.getFullYear()
@@ -147,7 +147,7 @@ message.channel.send({embed});
 
 // SERVER INFO (+server)
 
-Vaniet.on('message', function(msg) {
+Light.on('message', function(msg) {
   if(msg.content.startsWith (prefix + 'server')) {
     if(!msg.channel.guild) return msg.reply('**:x: اسف لكن هذا الامر للسيرفرات فقط **');
     let embed = new Discord.RichEmbed()
@@ -170,7 +170,7 @@ Vaniet.on('message', function(msg) {
 
 // BANS LIST (+bans)
 
-Vaniet.on('message', message => {
+Light.on('message', message => {
   if(message.content == '+bans'){
       message.guild.fetchBans().then(bans => {
           bans.forEach(user => {
@@ -183,7 +183,7 @@ Vaniet.on('message', message => {
 
 // CLEARS CHAT (+clear)
 
-Vaniet.on('message', msg => {
+Light.on('message', msg => {
   if (msg.author.bot) return;
   if (!msg.content.startsWith(prefix)) return;
   let command = msg.content.split(" ")[0];
@@ -191,7 +191,7 @@ Vaniet.on('message', msg => {
   let args = msg.content.split(" ").slice(1);
 
     if(command === "clear") {
-        const emoji = Vaniet.emojis.find("name", "wastebasket")
+        const emoji = Light.emojis.find("name", "wastebasket")
     let textxt = args.slice(0).join("");
     if(msg.member.hasPermission("MANAGE_MESSAGES")) {
     if (textxt == "") {
@@ -211,7 +211,7 @@ Vaniet.on('message', msg => {
 // MUTES MEMBERS (+mute - +unmute)
 
 
-Vaniet.on('message', async message => {
+Light.on('message', async message => {
   let args = message.content.split(" ");
   if(message.content.startsWith("+mute")) {
     if(!message.member.hasPermission("MANAGE_ROLES")) return message.reply('**عذراً، أنت لا تمتلك الصلاحيات الازمة لهذا الأمـر** :x:').then(msg => {
@@ -219,7 +219,7 @@ Vaniet.on('message', async message => {
       message.delete(3500);
     });
 
-    if(!message.guild.member(Vaniet.user).hasPermission("MANAGE_ROLES")) return message.reply('**عذراً، لا يمتلك البوت الصلاحيات الازمة لهذا الأمر** :x:').then(msg => {
+    if(!message.guild.member(Light.user).hasPermission("MANAGE_ROLES")) return message.reply('**عذراً، لا يمتلك البوت الصلاحيات الازمة لهذا الأمر** :x:').then(msg => {
       msg.delete(3500);
       message.delete(3500);
     });
@@ -234,7 +234,7 @@ Vaniet.on('message', async message => {
       msg.delete(3500);
       message.delete(3500);
     });
-    if(mention.highestRole.positon >= message.guild.member(Vaniet.user).highestRole.positon) return message.reply('**عذراً، لا يمكنك اعطاء ميوت لأي شخص اداري** :x: ').then(msg => {
+    if(mention.highestRole.positon >= message.guild.member(Light.user).highestRole.positon) return message.reply('**عذراً، لا يمكنك اعطاء ميوت لأي شخص اداري** :x: ').then(msg => {
       msg.delete(3500);
       message.delete(3500);
     });
@@ -302,7 +302,7 @@ Vaniet.on('message', async message => {
       message.delete(3500);
     });
 
-    if(!message.guild.member(Vaniet.user).hasPermission("MANAGE_ROLES")) return message.reply('**عذراً، لا يمتلك البوت الصلاحيات الازمة لهذا الأمر** :x:').then(msg => {
+    if(!message.guild.member(Light.user).hasPermission("MANAGE_ROLES")) return message.reply('**عذراً، لا يمتلك البوت الصلاحيات الازمة لهذا الأمر** :x:').then(msg => {
       msg.delete(3500);
       message.delete(3500);
     });
@@ -323,7 +323,7 @@ Vaniet.on('message', async message => {
 // BANS MEMBERS! (+ban)
 
 
-Vaniet.on("message", async message => {
+Light.on("message", async message => {
       if(message.author.bot) return;
       if(message.channel.type === "dm") return;
 
@@ -367,19 +367,19 @@ Vaniet.on("message", async message => {
 // BOT INFO!! (+bot)
 
 
- Vaniet.on('message', message => {
+ Light.on('message', message => {
             if (message.content.startsWith("+" + "bot")) {
      let embed = new Discord.RichEmbed()
-.setTitle('VanietSystem. | فانيــت بوت')
+.setTitle('LightSystem. | فانيــت بوت')
 .setThumbnail(message.author.avatarURL)
-.addField('**Servers joined**',`**[${Vaniet.guilds.size}]**`)
-.addField('**Members**',`**[${Vaniet.users.size}]**`)
-.addField('**Chnnels**',`**[${Vaniet.channels.size}]**`)
+.addField('**Servers joined**',`**[${Light.guilds.size}]**`)
+.addField('**Members**',`**[${Light.users.size}]**`)
+.addField('**Chnnels**',`**[${Light.channels.size}]**`)
 .addField('**Ping**',`**[${Date.now() - message.createdTimestamp}]**`)
 .addField('**My language**','**Node JS**')
-.addField('** Devoloped By:**','**Vaniet**')
+.addField('** Devoloped By:**','**Light**')
 .setColor('#7d2dbe')
-.setFooter(`${Vaniet.user.username}`)
+.setFooter(`${Light.user.username}`)
   message.channel.sendEmbed(embed);
     }
 });
@@ -387,7 +387,7 @@ Vaniet.on("message", async message => {
 
 // KICKS MEMBERS (+kick)
 
-Vaniet.on("message", async message => {
+Light.on("message", async message => {
   if(message.author.bot) return;
   if(message.channel.type === "dm") return;
 
@@ -427,7 +427,7 @@ Vaniet.on("message", async message => {
 
 
 
-    Vaniet.on('message', message => {
+    Light.on('message', message => {
                 if (message.content.startsWith("+name")) {
          let embed = new Discord.RichEmbed()
     .setThumbnail(message.author.avatarURL)
@@ -440,7 +440,7 @@ Vaniet.on("message", async message => {
 
 // OWNER BOT CONTROLS!
 
-    Vaniet.on('message', message => {
+    Light.on('message', message => {
       if (!message.content.startsWith(prefix)) return;
       var args = message.content.split(' ').slice(1);
       var argresult = args.join(' ');
@@ -448,37 +448,37 @@ Vaniet.on("message", async message => {
 
 
       if (message.content.startsWith(prefix + 'setwatch')) {
-      Vaniet.user.setActivity(argresult, {type: 'WATCHING'})
+      Light.user.setActivity(argresult, {type: 'WATCHING'})
          console.log('test' + argresult);
         message.channel.sendMessage(`Watching Now: **${argresult}**`)
     }
 
 
       if (message.content.startsWith(prefix + 'setlis')) {
-      Vaniet.user.setActivity(argresult, {type: 'LISTENING'})
+      Light.user.setActivity(argresult, {type: 'LISTENING'})
          console.log('test' + argresult);
         message.channel.sendMessage(`LISTENING Now: **${argresult}**`)
     }
 
 
     if (message.content.startsWith(prefix + 'setname')) {
-      Vaniet.user.setUsername(argresult).then
+      Light.user.setUsername(argresult).then
           message.channel.sendMessage(`Username Changed To **${argresult}**`)
       return message.reply(".");
     }
 
     if (message.content.startsWith(prefix + 'setavatar')) {
-      Vaniet.user.setAvatar(argresult);
+      Light.user.setAvatar(argresult);
        message.channel.sendMessage(`Avatar Changed Successfully To **${argresult}**`);
     }
 
     if (message.content.startsWith(prefix + 'setstream')) {
-      Vaniet.user.setGame(argresult, "https://www.twitch.tv/9ivv");
+      Light.user.setGame(argresult, "https://www.twitch.tv/9ivv");
          console.log('test' + argresult);
         message.channel.sendMessage(`Streaming: **${argresult}**`)
     }
     if (message.content.startsWith(prefix + 'setplay')) {
-      Vaniet.user.setGame(argresult);
+      Light.user.setGame(argresult);
          console.log('test' + argresult);
         message.channel.sendMessage(`Playing: **${argresult}**`)
     }
@@ -491,7 +491,7 @@ Vaniet.on("message", async message => {
 
 // BROADCAST TO ALL MEMBERS!! (+bc)
 
-Vaniet.on("message", message => {
+Light.on("message", message => {
             if (message.content.startsWith("+bc")) {
                          if (!message.member.hasPermission("ADMINISTRATOR"))  return;
   let args = message.content.split(" ").slice(1);
@@ -504,7 +504,7 @@ Vaniet.on("message", message => {
 };
 });
 
-Vaniet.on('message', message => {
+Light.on('message', message => {
             if (message.content.startsWith("+bc")) {
      let embed = new Discord.RichEmbed()
 .setThumbnail(message.author.avatarURL)
@@ -515,23 +515,11 @@ Vaniet.on('message', message => {
 });
 
 
-// Invite Bots!! (+link)
-
-Vaniet.on('message', msg => {
-  if(msg.content.startsWith('+link')) {
-  if(msg.channel.type === 'dm') return;
-const user = msg.mentions.users.first();
-if(!user) return msg.channel.send('**```يرجى تحديد بوت لآضافته```**')
-if(!user.bot) return msg.reply('\`منشن بوت\`');
-msg.channel.send(`**Bot InviteURL : ** https://discordapp.com/oauth2/authorize?client_id=${user.id}&scope=bot&permissions=384064`)
-  }
-});
-
 
 // HELP!! (+help)
 
 
-Vaniet.on('message' , message => {
+Light.on('message' , message => {
 if (message.content === '+help public') {
          let embed = new Discord.RichEmbed()
 
@@ -543,7 +531,6 @@ if (message.content === '+help public') {
    .addField("**+help**","**ارسال هذه الأوامر للعضو في الخاص**")
    .addField("**+ping**","** عرض سرعة اتصال البوت**")
    .addField("**+bot**","**عرض معلومات عن البوت**")
-   .addField("**+link**","**لجلب رابط أي بوت في السيرفر بمنشن له**")
 
 
 .setColor('RANDOM')
@@ -551,7 +538,7 @@ if (message.content === '+help public') {
     }
 });
 
-Vaniet.on('message' , message => {
+Light.on('message' , message => {
 if (message.content === '+help admins') {
          let embed = new Discord.RichEmbed()
 
@@ -570,7 +557,7 @@ if (message.content === '+help admins') {
     }
 });
 
-Vaniet.on('message', message => {
+Light.on('message', message => {
             if (message.content.startsWith("+help")) {
      let embed = new Discord.RichEmbed()
 .setThumbnail(message.author.avatarURL)
@@ -581,7 +568,7 @@ Vaniet.on('message', message => {
     }
 });
 
-Vaniet.on('message', message => {
+Light.on('message', message => {
             if (message.content.startsWith("+help public")) {
      let embed = new Discord.RichEmbed()
 .setThumbnail(message.author.avatarURL)
@@ -591,7 +578,7 @@ Vaniet.on('message', message => {
     }
 });
 
-Vaniet.on('message', message => {
+Light.on('message', message => {
             if (message.content.startsWith("+help admins")) {
      let embed = new Discord.RichEmbed()
 .setThumbnail(message.author.avatarURL)
@@ -603,6 +590,6 @@ Vaniet.on('message', message => {
 
 //
 
-// Vaniet ☂
-// Made By Vaniet - Vaniet Bot.
-Vaniet.login('env.process.BOT_TOKEN')
+// Light ☂
+// Made By Vaniet - Light Bot.
+Light.login('env.process.BOT_TOKEN')
