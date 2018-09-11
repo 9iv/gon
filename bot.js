@@ -1,6 +1,5 @@
 const Discord = require('discord.js');
 const Light = new Discord.Client();
-const snekfetch = require("snekfetch");
 const prefix = ('+');
 
 
@@ -592,4 +591,4 @@ Light.on('message', message => {
 
 // Light ☂
 // Made By Vaniet - Light Bot.
-Light.login('env.process.BOT_TOKEN');
+Light.login('env.process.BOT_TOKEN')
