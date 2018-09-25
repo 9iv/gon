@@ -591,4 +591,4 @@ Light.on('message', message => {
 
 // Light ☂
 // Made By Vaniet - Light Bot.
-Light.login('env.process.BOT_TOKEN')
+Light.login(env.process.BOT_TOKEN)
