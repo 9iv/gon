@@ -1,2 +1,3 @@
 # LightSystem.
-A Discord bot coded in Discord.JS, hosted using Heroku.
+Discord.js Bot created with a multipe commands.
+# By Vanieeet ,
