@@ -1152,4 +1152,4 @@ message.react("❌")
  });
 
 //
-client.login('env.process.BOT_TOKEN');
+client.login(env.process.BOT_TOKEN)
